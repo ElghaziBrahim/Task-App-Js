@@ -19,9 +19,21 @@
             <input type="date" name="dueDate" id="duedate" placeholder="Due Date">
             <button type="submit" id="submit-button">Add Task</button>
         </form>
+        <hr>
+        <form class="task-edit-form">
+            <input type="text" name="title" id="title" class="titleEdit" placeholder="Title">
+            <input type="date" name="dueDate" id="duedate" class="dueDateEdit" placeholder="Due Date">
+            <label for="status">Status:</label>
 
+            <select name="status" id="status">
+                <option value="incomplete">incomplete</option>
+                <option value="completed">completed</option>
+            </select>
+            <button type="submit" id="submit-button-">save</button>
+        </form>
+        <hr>
+        <h4></h4>
         <div class="tasks">
-
         </div>
     </main>
 
