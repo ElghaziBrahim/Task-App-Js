@@ -2,6 +2,7 @@
 var tasks_table = JSON.parse(localStorage.getItem('tasks')) || [];
 var id = JSON.parse(localStorage.getItem('id')) || 0;
 var edit_id;
+var sorted = false
 
 // DOM elements
 const taskForm = document.querySelector(".task-form");
@@ -98,6 +99,18 @@ function saveToLocalStorage() {
     localStorage.setItem('tasks', JSON.stringify(tasks_table))
     localStorage.setItem('id', id)
 }
+function sortbyDueDate() {
+    console.log("sort called");
+    if (sorted) {
+        tasks_table.sort((t1, t2) => new Date(t2.dueDate) - new Date(t1.dueDate));
+        sorted = false
+    } else {
+        tasks_table.sort((t1, t2) => new Date(t1.dueDate) - new Date(t2.dueDate));
+        sorted = true
+    }
+    renderTasks();
+}
+
 
 // Initial rendering
 renderTasks();

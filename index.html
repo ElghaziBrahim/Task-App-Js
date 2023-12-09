@@ -19,7 +19,6 @@
             <input type="date" name="dueDate" id="duedate" placeholder="Due Date">
             <button type="submit" id="submit-button">Add Task</button>
         </form>
-        <hr>
         <form class="task-edit-form">
             <input type="text" name="title" id="title" class="titleEdit" placeholder="Title">
             <input type="date" name="dueDate" id="duedate" class="dueDateEdit" placeholder="Due Date">
@@ -32,8 +31,15 @@
             <button type="submit" id="submit-button-">save</button>
         </form>
         <hr>
+        <button class="sortbyDueDate" onclick="sortbyDueDate()">sort by due date</button>
         <h4></h4>
         <div class="tasks">
+            <div class="task">
+                <h2 class="title">Title :  </h2>
+                <h4 class="duedate">Due Date : 2023-10-29</h4>
+                <h4 class="status">Status : incomplete</h4>
+                <button class="editButton" onclick="deleteTask(10)">Delete</button>
+                <button class="editButton" onclick="editTask(10)">Edit</button></div>
         </div>
     </main>
 

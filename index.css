@@ -1,75 +1,87 @@
+/* Global styles */
 body {
-    background-color: #222;
-    color: #ddd;
-    font-family: sans-serif;
-  }
-  
-  header {
-    background-color: #333;
-    padding: 1em;
-  }
-  
-  h1 {
-    color: #fff;
-  }
-  
-  .task-form,
-  .task-edit-form {
-    background-color: #444;
-    padding: 1em;
-    border-radius: 5px;
-  }
-  
-  .task-form input,
-  .task-edit-form input,
-  .task-edit-form select {
-    background-color: #333;
-    color: #ddd;
-    border: 1px solid #555;
-    border-radius: 3px;
-    padding: 0.5em;
-    margin-bottom: 1em;
-  }
-  
-  .task-form button,
-  .task-edit-form button {
-    background-color: #555;
-    color: #ddd;
-    border: none;
-    border-radius: 3px;
-    padding: 0.5em 1em;
-    margin: 0 0.5em;
-    cursor: pointer;
-  }
-  
-  .tasks {
-    background-color: #333;
-    padding: 1em;
-    border-radius: 5px;
-  }
-  
-  .task {
-    border-bottom: 1px solid #555;
-    padding: 0.5em 1em;
-  }
-  
-  .task h2,
-  .task h4 {
-    color: #ddd;
-    margin-bottom: 0.5em;
-  }
-  
-  .task h4 {
-    font-size: 0.8em;
-    opacity: 0.8;
-  }
-  
-  .editButton {
-    background-color: transparent;
-    border: none;
-    color: #ddd;
-    font-size: 0.8em;
-    cursor: pointer;
-    background-color: #444;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #222;
+  color: #f5f5f5;
+}
+
+/* Header */
+header {
+  background-color: #333;
+  color: #f5f5f5;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+/* Main content */
+main {
+  padding: 20px;
+}
+
+/* Forms */
+form {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  padding: 10px;
+  border: none;
+  background-color: #333;
+  color: #f5f5f5;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #f5f5f5;
+  border: 1px solid #555;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Tasks */
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task {
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #333;
+  background-color: #333;
+  color: #f5f5f5;
+}
+
+.task > * {
+  margin-bottom: 5px;
+}
+
+.editButton {
+  padding: 5px 10px;
+  border: none;
+  background-color: #444;
+  color: #f5f5f5;
+  border-radius: 5px;
+  cursor: pointer;
+}
