@@ -35,7 +35,8 @@ function createTaskElement(task) {
         <h2 class="title">Title : ${task.title} </h2>
         <h4 class="duedate">Due Date : ${task.dueDate}</h4>
         <h4 class="status">Status : ${task.status}</h4>
-        <button class="editButton" onclick="editTask(${task.id})">edit</button>`;
+        <button class="editButton" onclick="deleteTast(${task.id})">Delete</button>
+        <button class="editButton" onclick="editTask(${task.id})">Edit</button>`;
     tasks.appendChild(newTask);
 }
 
@@ -53,6 +54,15 @@ function editTask(id) {
     taskEditForm.style.display = 'block';
     taskForm.style.display = 'none';
 }
+function deleteTast(id) {
+    let buttonId = id;
+    let taskNow = tasks_table.filter((t) => t.id == buttonId);
+    const index = tasks_table.findIndex(t => t.id === buttonId);
+    if (index !== -1) {
+        tasks_table.splice(index, 1);
+    }
+    renderTasks()
+}
 
 function handleTaskFormSubmit(e) {
     e.preventDefault();
@@ -63,7 +73,7 @@ function handleTaskFormSubmit(e) {
         status: 'incomplete'
     };
     tasks_table.push(newTaskForm);
-    renderTasks();
+    renderTasks()
     titleInput.value = "";
     dueDateInput.value = "";
 }
@@ -81,6 +91,3 @@ function handleTaskEditFormSubmit(e) {
     taskEditForm.style.display = 'none';
     taskForm.style.display = 'block';
 }
-
-// Initial rendering
-renderTasks();
