@@ -1,3 +1,4 @@
+// index.js
 // Global variables
 var tasks_table = JSON.parse(localStorage.getItem('tasks')) || [];
 var id = JSON.parse(localStorage.getItem('id')) || 0;
@@ -10,8 +11,10 @@ const taskEditForm = document.querySelector(".task-edit-form");
 const tasks = document.querySelector(".tasks");
 const titleInput = document.getElementById('title');
 const dueDateInput = document.getElementById('duedate');
+const priorityInput = document.getElementById('priority');
 const titleEdit = document.querySelector('.titleEdit');
 const dueDateEdit = document.querySelector('.dueDateEdit');
+const priorityEdit = document.querySelector('.priorityEdit');
 const statusEdit = document.querySelector('#status');
 
 // Event listeners
@@ -36,6 +39,7 @@ function createTaskElement(task) {
     newTask.innerHTML = `
         <h2 class="title">Title : ${task.title} </h2>
         <h4 class="duedate">Due Date : ${task.dueDate}</h4>
+        <h4 class="priority">Priority : ${task.priority}</h4>
         <h4 class="status">Status : ${task.status}</h4>
         <button class="editButton" onclick="deleteTask(${task.id})">Delete</button>
         <button class="editButton" onclick="editTask(${task.id})">Edit</button>`;
@@ -48,6 +52,7 @@ function editTask(id) {
 
     dueDateEdit.value = taskNow[0].dueDate;
     titleEdit.value = taskNow[0].title;
+    priorityEdit.value = taskNow[0].priority;
     const index = tasks_table.findIndex(t => t.id === buttonId);
     edit_id = buttonId;
     if (index !== -1) {
@@ -73,12 +78,14 @@ function handleTaskFormSubmit(e) {
         id: ++id,
         title: titleInput.value,
         dueDate: dueDateInput.value,
+        priority: parseInt(priorityInput.value) || 1,
         status: 'incomplete'
     };
     tasks_table.push(newTaskForm);
     renderTasks();
     titleInput.value = "";
     dueDateInput.value = "";
+    priorityInput.value = "";
 }
 
 function handleTaskEditFormSubmit(e) {
@@ -87,6 +94,7 @@ function handleTaskEditFormSubmit(e) {
         id: edit_id,
         title: titleEdit.value,
         dueDate: dueDateEdit.value,
+        priority: parseInt(priorityEdit.value) || 1,
         status: statusEdit.value
     };
     tasks_table.push(newTaskForm);
@@ -101,7 +109,6 @@ function saveToLocalStorage() {
 }
 
 function sortbyDueDate() {
-    console.log("sort called");
     if (sorted) {
         tasks_table.sort((t1, t2) => new Date(t2.dueDate) - new Date(t1.dueDate));
         sorted = false;
@@ -111,17 +118,24 @@ function sortbyDueDate() {
     }
     renderTasks();
 }
+
+function sortbyPriority() {
+    tasks_table.sort((t1, t2) => t1.priority - t2.priority);
+    renderTasks();
+}
+
 function sortbyStatus() {
-    const elementsToMove = tasks_table.filter((t) => t.status === "incomplete");
-
-    const remainingElements = tasks_table.filter((t) => t.status === "completed");
-
-    const newArray = elementsToMove.concat(remainingElements);
-
-    tasks_table = newArray
-    console.log(tasks_table)
-    renderTasks()
+    tasks_table.sort((t1, t2) => {
+        if (t1.status === 'incomplete' && t2.status === 'completed') {
+            return -1;
+        } else if (t1.status === 'completed' && t2.status === 'incomplete') {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+    renderTasks();
 }
 
 // Initial rendering
-renderTasks()
+renderTasks();

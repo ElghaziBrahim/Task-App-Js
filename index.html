@@ -1,10 +1,11 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Task Tracker</title>
     <link rel="stylesheet" href="index.css">
 </head>
 
@@ -17,13 +18,14 @@
         <form class="task-form">
             <input type="text" name="title" id="title" placeholder="Title">
             <input type="date" name="dueDate" id="duedate" placeholder="Due Date">
+            <input type="number" name="priority" id="priority" placeholder="Priority">
             <button type="submit" id="submit-button">Add Task</button>
         </form>
         <form class="task-edit-form">
             <input type="text" name="title" id="title" class="titleEdit" placeholder="Title">
             <input type="date" name="dueDate" id="duedate" class="dueDateEdit" placeholder="Due Date">
+            <input type="number" name="priority" id="priority" class="priorityEdit" placeholder="Priority">
             <label for="status">Status:</label>
-
             <select name="status" id="status">
                 <option value="incomplete">incomplete</option>
                 <option value="completed">completed</option>
@@ -31,23 +33,17 @@
             <button type="submit" id="submit-button-">save</button>
         </form>
         <hr>
-        <button class="sortbyDueDate" onclick="sortbyDueDate()">sort by due date</button>
-        <button class="sortbyStatus" onclick="sortbyStatus()">sort by status</button>
+        <button class="sortbyDueDate" onclick="sortbyDueDate()">Sort by Due Date</button>
+        <button class="sortbyPriority" onclick="sortbyPriority()">Sort by Priority</button>
+        <button class="sortbyStatus" onclick="sortbyStatus()">Sort by Status</button>
 
         <h4></h4>
         <div class="tasks">
-            <div class="task">
-                <h2 class="title">Title : </h2>
-                <h4 class="duedate">Due Date : 2023-10-29</h4>
-                <h4 class="status">Status : incomplete</h4>
-                <button class="editButton" onclick="deleteTask(10)">Delete</button>
-                <button class="editButton" onclick="editTask(10)">Edit</button>
-            </div>
+            <!-- Task elements will be dynamically added here -->
         </div>
     </main>
 
     <script src="index.js"></script>
-
 </body>
 
 </html>
