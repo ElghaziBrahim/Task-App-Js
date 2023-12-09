@@ -2,7 +2,7 @@
 var tasks_table = JSON.parse(localStorage.getItem('tasks')) || [];
 var id = JSON.parse(localStorage.getItem('id')) || 0;
 var edit_id;
-var sorted = false
+var sorted = false;
 
 // DOM elements
 const taskForm = document.querySelector(".task-form");
@@ -96,21 +96,32 @@ function handleTaskEditFormSubmit(e) {
 }
 
 function saveToLocalStorage() {
-    localStorage.setItem('tasks', JSON.stringify(tasks_table))
-    localStorage.setItem('id', id)
+    localStorage.setItem('tasks', JSON.stringify(tasks_table));
+    localStorage.setItem('id', id);
 }
+
 function sortbyDueDate() {
     console.log("sort called");
     if (sorted) {
         tasks_table.sort((t1, t2) => new Date(t2.dueDate) - new Date(t1.dueDate));
-        sorted = false
+        sorted = false;
     } else {
         tasks_table.sort((t1, t2) => new Date(t1.dueDate) - new Date(t2.dueDate));
-        sorted = true
+        sorted = true;
     }
     renderTasks();
 }
+function sortbyStatus() {
+    const elementsToMove = tasks_table.filter((t) => t.status === "incomplete");
 
+    const remainingElements = tasks_table.filter((t) => t.status === "completed");
+
+    const newArray = elementsToMove.concat(remainingElements);
+
+    tasks_table = newArray
+    console.log(tasks_table)
+    renderTasks()
+}
 
 // Initial rendering
-renderTasks();
+renderTasks()
