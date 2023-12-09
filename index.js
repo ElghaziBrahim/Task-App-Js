@@ -1,6 +1,6 @@
 // Global variables
-var tasks_table = [];
-var id = 0;
+var tasks_table = JSON.parse(localStorage.getItem('tasks')) || [];
+var id = JSON.parse(localStorage.getItem('id')) || 0;
 var edit_id;
 
 // DOM elements
@@ -26,6 +26,7 @@ function renderTasks() {
     for (let task of tasks_table) {
         createTaskElement(task);
     }
+    saveToLocalStorage();
 }
 
 function createTaskElement(task) {
@@ -35,7 +36,7 @@ function createTaskElement(task) {
         <h2 class="title">Title : ${task.title} </h2>
         <h4 class="duedate">Due Date : ${task.dueDate}</h4>
         <h4 class="status">Status : ${task.status}</h4>
-        <button class="editButton" onclick="deleteTast(${task.id})">Delete</button>
+        <button class="editButton" onclick="deleteTask(${task.id})">Delete</button>
         <button class="editButton" onclick="editTask(${task.id})">Edit</button>`;
     tasks.appendChild(newTask);
 }
@@ -54,14 +55,15 @@ function editTask(id) {
     taskEditForm.style.display = 'block';
     taskForm.style.display = 'none';
 }
-function deleteTast(id) {
+
+function deleteTask(id) {
     let buttonId = id;
     let taskNow = tasks_table.filter((t) => t.id == buttonId);
     const index = tasks_table.findIndex(t => t.id === buttonId);
     if (index !== -1) {
         tasks_table.splice(index, 1);
     }
-    renderTasks()
+    renderTasks();
 }
 
 function handleTaskFormSubmit(e) {
@@ -73,7 +75,7 @@ function handleTaskFormSubmit(e) {
         status: 'incomplete'
     };
     tasks_table.push(newTaskForm);
-    renderTasks()
+    renderTasks();
     titleInput.value = "";
     dueDateInput.value = "";
 }
@@ -91,3 +93,11 @@ function handleTaskEditFormSubmit(e) {
     taskEditForm.style.display = 'none';
     taskForm.style.display = 'block';
 }
+
+function saveToLocalStorage() {
+    localStorage.setItem('tasks', JSON.stringify(tasks_table))
+    localStorage.setItem('id', id)
+}
+
+// Initial rendering
+renderTasks();
